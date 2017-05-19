@@ -1,21 +1,19 @@
-## Extract tables of main interest from original data source
+## Download and preprocess data, write TAF input tables
 
-## Before: stockobject.Rdata
+## Before: stockobject.Rdata (ftp)
 ## After:  latage.csv, wcatch.csv, datage.csv, wdiscards.csv, wstock.csv,
-##         survey_uk.csv, survey_fr.csv
+##         survey_uk.csv, survey_fr.csv (db)
 
 suppressMessages(require(FLCore, quietly=TRUE))
 require(methods, quietly=TRUE)
 require(icesTAF, quietly=TRUE)
 
-ftp.remote <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
-ftp.local <- "../../../ftp/wgnssk/2016/ple-eche/"
+ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
 
 dir.create("db", showWarnings=FALSE)
-dir.create(paste0(ftp.local,"input"), showWarnings=FALSE, recursive=TRUE)
 
 ## Get stock data
-download.file(paste0(ftp.remote,"db/stockobject.Rdata"), "db/stockobject.Rdata", quiet=TRUE)
+download.file(paste0(ftp,"db/stockobject.Rdata"), "db/stockobject.Rdata", quiet=TRUE)
 load("db/stockobject.Rdata")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
@@ -24,7 +22,8 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-indices <- readFLIndices(paste0(ftp.remote,"db/PLE7DFleet_2016.txt"), na.strings="-1")
+download.file(paste0(ftp,"db/PLE7DFleet_2016.txt"), "db/PLE7DFleet_2016.txt", quiet=TRUE)
+indices <- readFLIndices("db/PLE7DFleet_2016.txt", na.strings="-1")
 indices[[2]] <- trim(indices[[2]], age=1:6)
 
 ## Extract tables
@@ -36,11 +35,11 @@ stock.wt <- flr2taf(stock@stock.wt); stock.wt[stock.wt==0] <- NA
 survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
-## Write tables to local FTP directory
-write.csv(landings.n, paste0(ftp.local,"input/latage.csv"), quote=FALSE, row.names=FALSE)
-write.csv(landings.wt, paste0(ftp.local,"input/wcatch.csv"), quote=FALSE, row.names=FALSE)
-write.csv(discards.n, paste0(ftp.local,"input/datage.csv"), quote=FALSE, row.names=FALSE)
-write.csv(discards.wt, paste0(ftp.local,"input/wdiscards.csv"), quote=FALSE, row.names=FALSE)
-write.csv(stock.wt, paste0(ftp.local,"input/wstock.csv"), quote=FALSE, row.names=FALSE)
-write.csv(survey.uk, paste0(ftp.local,"input/survey_uk.csv"), quote=FALSE, row.names=FALSE)
-write.csv(survey.fr, paste0(ftp.local,"input/survey_fr.csv"), quote=FALSE, row.names=FALSE)
+## Write TAF tables to db directory
+write.taf(landings.n, "db/latage.csv")
+write.taf(landings.wt, "db/wcatch.csv")
+write.taf(discards.n, "db/datage.csv")
+write.taf(discards.wt, "db/wdiscards.csv")
+write.taf(stock.wt, "db/wstock.csv")
+write.taf(survey.uk, "db/survey_uk.csv")
+write.taf(survey.fr, "db/survey_fr.csv")

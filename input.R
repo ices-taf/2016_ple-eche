@@ -1,7 +1,7 @@
-## Create model input file in 'input' working directory
+## Convert data to model format, write model input files
 
-## Before: stockobject.Rdata, PLE7DFleet_2016.txt
-## After:  assess.dat, input.RData
+## Before: stockobject.Rdata, PLE7DFleet_2016.txt (db)
+## After:  assess.dat, input.RData (input)
 
 suppressMessages(require(FLAssess, quietly=TRUE))
 require(splines, quietly=TRUE)
@@ -10,13 +10,10 @@ require(methods, quietly=TRUE)
 
 source("utilities.R")
 
-ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
-
 dir.create("input", showWarnings=FALSE)
 
 ## Get stock data
-download.file(paste0(ftp,"db/stockobject.Rdata"), "input/stockobject.Rdata", quiet=TRUE)
-load("input/stockobject.Rdata")
+load("db/stockobject.Rdata")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -24,7 +21,7 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-indices <- readFLIndices(paste0(ftp,"db/PLE7DFleet_2016.txt"), na.strings="-1")
+indices <- readFLIndices("db/PLE7DFleet_2016.txt", na.strings="-1")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Write model input files

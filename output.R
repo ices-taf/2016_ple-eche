@@ -1,15 +1,13 @@
-## Extract tables from FLAAP results and write into output folder
+## Extract model results of interest, write TAF output tables
 
-## Before: input.RData, results.RData, sole.rep, sole.std
-## After: res_landings.csv, res_discards.csv, res_survey_uk.csv,
-##          res_survey_fr.csv, fatage.csv, natage.csv, summary.csv
+## Before: input.RData, results.RData, sole.rep, sole.std (model)
+## After:  res_landings.csv, res_discards.csv, res_survey_uk.csv,
+##         res_survey_fr.csv, fatage.csv, natage.csv, summary.csv (output)
 
 require(icesTAF, quietly=TRUE)
 suppressMessages(require(FLCore, quietly=TRUE))
 
-ftp <- "../../../ftp/wgnssk/2016/ple-eche/"
-
-dir.create(paste0(ftp,"output"), showWarnings=FALSE, recursive=TRUE)
+dir.create("output", showWarnings=FALSE, recursive=TRUE)
 
 load("input/input.RData")
 load("model/results.RData")
@@ -57,11 +55,11 @@ fbar <- apply(results@harvest[3:6], 2, mean)[drop=TRUE]
 summary <- data.frame(Year=year, Rec=rec, SSB=ssb, Catch=catch,
                       Landings=landings, Biomass=bio, Fbar=fbar)
 
-## Write tables to local FTP directory
-write.csv(res_landings, paste0(ftp,"output/res_landings.csv"), quote=FALSE, row.names=FALSE)
-write.csv(res_discards, paste0(ftp,"output/res_discards.csv"), quote=FALSE, row.names=FALSE)
-write.csv(res_survey_uk, paste0(ftp,"output/res_survey_uk.csv"), quote=FALSE, row.names=FALSE)
-write.csv(res_survey_fr, paste0(ftp,"output/res_survey_fr.csv"), quote=FALSE, row.names=FALSE)
-write.csv(fatage, paste0(ftp,"output/fatage.csv"), quote=FALSE, row.names=FALSE)
-write.csv(natage, paste0(ftp,"output/natage.csv"), quote=FALSE, row.names=FALSE)
-write.csv(summary, paste0(ftp,"output/summary.csv"), quote=FALSE, row.names=FALSE)
+## Write tables to output directory
+write.taf(res_landings, "output/res_landings.csv")
+write.taf(res_discards, "output/res_discards.csv")
+write.taf(res_survey_uk, "output/res_survey_uk.csv")
+write.taf(res_survey_fr, "output/res_survey_fr.csv")
+write.taf(fatage, "output/fatage.csv")
+write.taf(natage, "output/natage.csv")
+write.taf(summary, "output/summary.csv")
