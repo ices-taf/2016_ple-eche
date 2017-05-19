@@ -3,6 +3,7 @@
 ## Before: stockobject.Rdata, PLE7DFleet_2016.txt (db)
 ## After:  assess.dat, input.RData (input)
 
+require(icesTAF, quietly=TRUE)
 suppressMessages(require(FLAssess, quietly=TRUE))
 require(splines, quietly=TRUE)
 suppressMessages(require(mgcv, quietly=TRUE))
@@ -10,7 +11,7 @@ require(methods, quietly=TRUE)
 
 source("utilities.R")
 
-dir.create("input", showWarnings=FALSE)
+mkdir("input")
 
 ## Get stock data
 load("db/stockobject.Rdata")

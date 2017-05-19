@@ -10,7 +10,7 @@ require(icesTAF, quietly=TRUE)
 
 ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
 
-dir.create("db", showWarnings=FALSE)
+mkdir("db")
 
 ## Get stock data
 download.file(paste0(ftp,"db/stockobject.Rdata"), "db/stockobject.Rdata", quiet=TRUE)

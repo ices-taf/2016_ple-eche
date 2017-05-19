@@ -7,7 +7,7 @@
 require(icesTAF, quietly=TRUE)
 suppressMessages(require(FLCore, quietly=TRUE))
 
-dir.create("output", showWarnings=FALSE, recursive=TRUE)
+mkdir("output")
 
 load("input/input.RData")
 load("model/results.RData")

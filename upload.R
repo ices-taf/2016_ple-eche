@@ -1,24 +1,18 @@
 ## Gather TAF input and output tables to be uploaded
 
-## Before: catch.csv, survey.csv, dls.txt (db, output)
-## After:  catch.csv, survey.csv, dls.txt (upload)
+## Before: datage.csv, latage.csv, survey_fr.csv, survey_uk.csv, wcatch.csv,
+##         wdiscards.csv, wstock.csv, fatage.csv, natage.csv, res_discards.csv,
+##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
+##         summary.csv (db, output)
+## After:  datage.csv, latage.csv, survey_fr.csv, survey_uk.csv, wcatch.csv,
+##         wdiscards.csv, wstock.csv, fatage.csv, natage.csv, res_discards.csv,
+##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
+##         summary.csv (upload)
 
-dir.create("upload/input", showWarnings=FALSE, recursive=TRUE)
-dir.create("upload/output", showWarnings=FALSE)
+require(icesTAF, quietly=TRUE)
 
-## Input
-invisible(file.copy("db/datage.csv", "upload/input/datage.csv", overwrite=TRUE))
-invisible(file.copy("db/latage.csv", "upload/input/latage.csv", overwrite=TRUE))
-invisible(file.copy("db/survey_fr.csv", "upload/input/survey_fr.csv", overwrite=TRUE))
-invisible(file.copy("db/wcatch.csv", "upload/input/wcatch.csv", overwrite=TRUE))
-invisible(file.copy("db/wdiscards.csv", "upload/input/wdiscards.csv", overwrite=TRUE))
-invisible(file.copy("db/wstock.csv", "upload/input/wstock.csv", overwrite=TRUE))
+mkdir("upload/input")
+mkdir("upload/output")
 
-## Output
-invisible(file.copy("output/fatage.csv", "upload/output/fatage.csv", overwrite=TRUE))
-invisible(file.copy("output/natage.csv", "upload/output/natage.csv", overwrite=TRUE))
-invisible(file.copy("output/res_discards.csv", "upload/output/res_discards.csv", overwrite=TRUE))
-invisible(file.copy("output/res_landings.csv", "upload/output/res_landings.csv", overwrite=TRUE))
-invisible(file.copy("output/res_survey_fr.csv", "upload/output/res_survey_fr.csv", overwrite=TRUE))
-invisible(file.copy("output/res_survey_uk.csv", "upload/output/res_survey_uk.csv", overwrite=TRUE))
-invisible(file.copy("output/summary.csv", "upload/output/summary.csv", overwrite=TRUE))
+cp("db/*.csv", "upload/input")
+cp("output/*.csv", "upload/output")
