@@ -1,7 +1,7 @@
 ## Download and preprocess data, write TAF input tables
 
 ## Before: stockobject.Rdata (ftp)
-## After:  latage.csv, wcatch.csv, datage.csv, wdiscards.csv, wstock.csv,
+## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
 ##         survey_uk.csv, survey_fr.csv (db)
 
 suppressMessages(require(FLCore, quietly=TRUE))
@@ -36,10 +36,10 @@ survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
 ## Write TAF tables to db directory
-write.taf(landings.n, "db/latage.csv")
-write.taf(landings.wt, "db/wcatch.csv")
-write.taf(discards.n, "db/datage.csv")
-write.taf(discards.wt, "db/wdiscards.csv")
-write.taf(stock.wt, "db/wstock.csv")
-write.taf(survey.uk, "db/survey_uk.csv")
-write.taf(survey.fr, "db/survey_fr.csv")
+write.taf(landings.n, "db/latage.csv")     # 2.3.1
+write.taf(landings.wt, "db/wlandings.csv") # 2.3.2
+write.taf(discards.n, "db/datage.csv")     # 2.3.3
+write.taf(discards.wt, "db/wdiscards.csv") # 2.3.4
+write.taf(stock.wt, "db/wstock.csv")       # 2.3.5
+write.taf(survey.uk, "db/survey_uk.csv")   # 2.6.1a
+write.taf(survey.fr, "db/survey_fr.csv")   # 2.6.1b

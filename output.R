@@ -56,10 +56,10 @@ summary <- data.frame(Year=year, Rec=rec, SSB=ssb, Catch=catch,
                       Landings=landings, Biomass=bio, Fbar=fbar)
 
 ## Write tables to output directory
-write.taf(res_landings, "output/res_landings.csv")
-write.taf(res_discards, "output/res_discards.csv")
-write.taf(res_survey_uk, "output/res_survey_uk.csv")
-write.taf(res_survey_fr, "output/res_survey_fr.csv")
-write.taf(fatage, "output/fatage.csv")
-write.taf(natage, "output/natage.csv")
-write.taf(summary, "output/summary.csv")
+write.taf(res_landings, "output/res_landings.csv")   # 3.1.2a
+write.taf(res_discards, "output/res_discards.csv")   # 3.1.2b
+write.taf(res_survey_uk, "output/res_survey_uk.csv") # 3.1.3a
+write.taf(res_survey_fr, "output/res_survey_fr.csv") # 3.1.3b
+write.taf(fatage, "output/fatage.csv")   # 3.1.4a
+write.taf(natage, "output/natage.csv")   # 3.1.4b
+write.taf(summary, "output/summary.csv") # 3.1.6
