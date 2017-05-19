@@ -99,7 +99,9 @@ makeDAT <- function(stock, numYr,qplat_Fmatrix,qplat_surveys,F_age_knots,F_time_
 } # end of function
 
 
-assessment <- function(stock, indices, control, addargs=" "){
+assessment <- function(stock, indices, control, addargs=" ", input=TRUE, model=TRUE){
+  # input: whether to write *.dat input file
+  # model: whether to run model and read output files
 
   #TODO check if survey age ranges extend stock: that is not possible and results in incorrect results 
   
@@ -156,7 +158,17 @@ assessment <- function(stock, indices, control, addargs=" "){
   ###   5. Create .dat file
   ### ------------------------------------------------------------------------------------------------------ 
  # capture.output(makeDAT(stock, numYr, qplat,F_age_knots,F_time_knots,W_time_knots, numAges, pGrp, indMPs, selSplines, Fspline, Wspline, tquants), file=paste(path,"\\assess",".dat",sep=""))
-  capture.output(makeDAT(stock, numYr, qplat_Fmatrix,qplat_surveys,F_age_knots,F_time_knots,W_time_knots, numAges, pGrp, indMPs, selSpline, X, WSpline, tquants), file=paste(path,"\\assess",".dat",sep=""))
+  if (input)
+  {
+    capture.output(makeDAT(stock, numYr, qplat_Fmatrix,qplat_surveys,F_age_knots,F_time_knots,W_time_knots, numAges, pGrp, indMPs, selSpline, X, WSpline, tquants), file=paste(path,"/assess",".dat",sep=""))
+  }
+
+  ### ------------------------------------------------------------------------------------------------------
+  ###   6. Run model & read output files
+  ### ------------------------------------------------------------------------------------------------------
+  if (model)
+  {
+  capture.output(makeDAT(stock, numYr, qplat_Fmatrix,qplat_surveys,F_age_knots,F_time_knots,W_time_knots, numAges, pGrp, indMPs, selSpline, X, WSpline, tquants), file=paste(path,"/assess",".dat",sep=""))
   oldPath <- getwd()
   setwd(path)  
   
@@ -167,8 +179,8 @@ assessment <- function(stock, indices, control, addargs=" "){
   res     <- new("FLAAP")
   
   if (control@mcmc==F){ 
-    if (file.exists("sole.std")) shell("rm sole.std")
-    shell(paste("sole.exe -nox -ind assess.dat", addargs, sep=""))
+    if (file.exists("sole.std")) system("rm sole.std")
+    system(paste("sole -nox -ind assess.dat", addargs, sep=""))
     #First see if std file exists. If not: trouble
     if (file.exists(paste(modName,".std",sep=""))){
       repFull <- readLines(paste(modName,".rep",sep=""),n=-1)
@@ -193,8 +205,8 @@ assessment <- function(stock, indices, control, addargs=" "){
     res@stock.wt <- as.FLQuant(t(matrix(data.matrix(estSWT),nrow=nyears, dimnames=dmns)))
         
   } else if (control@mcmc== T){
-    shell(paste("sole.exe -mcmc 1e5 -mcsave 1e2", addargs, sep=""))
-    shell("sole.exe -mceval") 
+    system(paste("sole -ind assess.dat -mcmc 1e5 -mcsave 1e2", addargs, sep=""))
+    system("sole -ind assess.dat -mceval") 
     repFull <- readLines(paste(modName,".rep",sep=""),n=-1)
     stdfile <- readLines(paste(modName,".std",sep=""))
     
@@ -275,6 +287,7 @@ assessment <- function(stock, indices, control, addargs=" "){
   res@control <- control
   
   return(res)
+  }
 }  
 
   
