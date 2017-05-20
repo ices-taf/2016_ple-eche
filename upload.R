@@ -9,7 +9,7 @@
 ##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
 ##         summary.csv (upload)
 
-require(icesTAF, quietly=TRUE)
+library(icesTAF)
 
 mkdir("upload/input")
 mkdir("upload/output")

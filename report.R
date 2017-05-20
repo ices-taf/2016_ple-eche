@@ -7,7 +7,7 @@
 ##         maturity_rep.csv, summary_rep.csv, natage_rep.csv,
 ##         fatage_rep.csv (upload)
 
-require(icesTAF, quietly=TRUE)
+library(icesTAF)
 
 mkdir("upload/report")
 

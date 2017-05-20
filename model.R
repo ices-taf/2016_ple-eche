@@ -3,11 +3,11 @@
 ## Before: sole(.exe), assess.dat, input.RData (ftp, input)
 ## After:  results.RData, sole.rep, sole.std (model)
 
-require(icesTAF, quietly=TRUE)
-suppressMessages(require(FLAssess, quietly=TRUE))
-require(splines, quietly=TRUE)
-suppressMessages(require(mgcv, quietly=TRUE))
-require(methods, quietly=TRUE)
+library(icesTAF)
+suppressMessages(library(FLAssess))
+library(splines)
+suppressMessages(library(mgcv))
+library(methods)
 
 source("utilities.R")
 

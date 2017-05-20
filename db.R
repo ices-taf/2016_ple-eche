@@ -4,9 +4,9 @@
 ## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
 ##         survey_uk.csv, survey_fr.csv (db)
 
-suppressMessages(require(FLCore, quietly=TRUE))
-require(methods, quietly=TRUE)
-require(icesTAF, quietly=TRUE)
+suppressMessages(library(FLCore))
+library(methods)
+library(icesTAF)
 
 ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
 

@@ -4,8 +4,8 @@
 ## After:  res_landings.csv, res_discards.csv, res_survey_uk.csv,
 ##         res_survey_fr.csv, fatage.csv, natage.csv, summary.csv (output)
 
-require(icesTAF, quietly=TRUE)
-suppressMessages(require(FLCore, quietly=TRUE))
+library(icesTAF)
+suppressMessages(library(FLCore))
 
 mkdir("output")
 

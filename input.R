@@ -3,11 +3,11 @@
 ## Before: stockobject.Rdata, PLE7DFleet_2016.txt (db)
 ## After:  assess.dat, input.RData (input)
 
-require(icesTAF, quietly=TRUE)
-suppressMessages(require(FLAssess, quietly=TRUE))
-require(splines, quietly=TRUE)
-suppressMessages(require(mgcv, quietly=TRUE))
-require(methods, quietly=TRUE)
+library(icesTAF)
+suppressMessages(library(FLAssess))
+library(splines)
+suppressMessages(library(mgcv))
+library(methods)
 
 source("utilities.R")
 
