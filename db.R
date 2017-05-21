@@ -35,7 +35,7 @@ stock.wt <- flr2taf(stock@stock.wt); stock.wt[stock.wt==0] <- NA
 survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
-## Write TAF tables to db directory
+## Write tables to db directory
 write.taf(landings.n, "db/latage.csv")     # 2.3.1
 write.taf(landings.wt, "db/wlandings.csv") # 2.3.2
 write.taf(discards.n, "db/datage.csv")     # 2.3.3
