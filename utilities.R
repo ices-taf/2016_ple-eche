@@ -1,3 +1,5 @@
+suppressMessages(library(FLAssess))
+library(methods)
 
 setClass("FLAAP.control",
          representation(
