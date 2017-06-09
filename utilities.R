@@ -182,7 +182,7 @@ assessment <- function(stock, indices, control, addargs=" ", input=TRUE, model=T
   
   if (control@mcmc==F){ 
     if (file.exists("sole.std")) system("rm sole.std")
-    system(paste("sole -nox -ind assess.dat", addargs, sep=""))
+    system(paste("./sole -nox -ind assess.dat", addargs, sep=""))
     #First see if std file exists. If not: trouble
     if (file.exists(paste(modName,".std",sep=""))){
       repFull <- readLines(paste(modName,".rep",sep=""),n=-1)
@@ -207,8 +207,8 @@ assessment <- function(stock, indices, control, addargs=" ", input=TRUE, model=T
     res@stock.wt <- as.FLQuant(t(matrix(data.matrix(estSWT),nrow=nyears, dimnames=dmns)))
         
   } else if (control@mcmc== T){
-    system(paste("sole -ind assess.dat -mcmc 1e5 -mcsave 1e2", addargs, sep=""))
-    system("sole -ind assess.dat -mceval") 
+    system(paste("./sole -ind assess.dat -mcmc 1e5 -mcsave 1e2", addargs, sep=""))
+    system("./sole -ind assess.dat -mceval") 
     repFull <- readLines(paste(modName,".rep",sep=""),n=-1)
     stdfile <- readLines(paste(modName,".std",sep=""))
     
