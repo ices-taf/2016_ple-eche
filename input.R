@@ -1,6 +1,6 @@
 ## Convert data to model format, write model input files
 
-## Before: stockobject.Rdata, PLE7DFleet_2016.txt (db)
+## Before: stockobject.Rdata, PLE7DFleet_2016.txt (data)
 ## After:  assess.dat, input.RData (input)
 
 library(icesTAF)
@@ -14,7 +14,7 @@ source("utilities.R")
 mkdir("input")
 
 ## Get stock data
-load("db/stockobject.Rdata")
+load("data/stockobject.Rdata")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -22,7 +22,7 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-indices <- readFLIndices("db/PLE7DFleet_2016.txt", na.strings="-1")
+indices <- readFLIndices("data/PLE7DFleet_2016.txt", na.strings="-1")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Write model input files
