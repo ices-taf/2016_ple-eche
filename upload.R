@@ -3,7 +3,7 @@
 ## Before: datage.csv, latage.csv, survey_fr.csv, survey_uk.csv, wlandings.csv,
 ##         wdiscards.csv, wstock.csv, fatage.csv, natage.csv, res_discards.csv,
 ##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
-##         summary.csv (db, output)
+##         summary.csv (data, output)
 ## After:  datage.csv, latage.csv, survey_fr.csv, survey_uk.csv, wlandings.csv,
 ##         wdiscards.csv, wstock.csv, fatage.csv, natage.csv, res_discards.csv,
 ##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
@@ -14,5 +14,5 @@ library(icesTAF)
 mkdir("upload/input")
 mkdir("upload/output")
 
-cp("db/*.csv", "upload/input")
+cp("data/*.csv", "upload/input")
 cp("output/*.csv", "upload/output")
