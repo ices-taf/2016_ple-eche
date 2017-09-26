@@ -8,12 +8,12 @@ suppressMessages(library(FLCore))
 library(methods)
 library(icesTAF)
 
-ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
+url <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
 
 mkdir("data")
 
 ## Get stock data
-download.file(paste0(ftp,"raw/stockobject.Rdata"), "data/stockobject.Rdata", quiet=TRUE)
+download(paste0(url,"raw/stockobject.Rdata"), "data")
 load("data/stockobject.Rdata")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
@@ -22,7 +22,7 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-download.file(paste0(ftp,"raw/PLE7DFleet_2016.txt"), "data/PLE7DFleet_2016.txt", quiet=TRUE)
+download(paste0(url,"raw/PLE7DFleet_2016.txt"), "data")
 indices <- readFLIndices("data/PLE7DFleet_2016.txt", na.strings="-1")
 indices[[2]] <- trim(indices[[2]], age=1:6)
 

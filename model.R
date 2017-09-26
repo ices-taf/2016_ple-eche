@@ -11,14 +11,13 @@ library(methods)
 
 source("utilities.R")
 
-ftp <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
+url <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/"
 
 mkdir("model")
 
 ## Get model executable
 sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
-download.file(paste0(ftp,"/model/",sole), paste0("model/",sole), quiet=TRUE)
-Sys.chmod(paste0("model/", sole))
+download(paste0(url,"/model/",sole), "model")
 
 ## Get model input files
 cp("input/assess.dat", "model") # required by executable
