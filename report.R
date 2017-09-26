@@ -1,11 +1,11 @@
 ## Prepare tables for report
 
-## Before: catage.csv, smh.csv, wstock.csv, wcatch.csv,
-##         maturity.csv, summary.csv, natage.csv,
-##         fatage.csv (upload)
-## After:  catage.csv, smh.csv, wstock.csv, wcatch.csv,
-##         maturity.csv, summary.csv, natage.csv,
-##         fatage.csv (upload)
+## Before: latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
+##         survey_uk.csv, survey_fr.csv (data), res_discards.csv,
+##         summary.csv (output)
+## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
+##         survey_uk.csv, survey_fr.csv (data), res_discards.csv,
+##         summary.csv (report)
 
 library(icesTAF)
 

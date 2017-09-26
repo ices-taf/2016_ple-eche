@@ -1,6 +1,6 @@
-## Download and preprocess data, write TAF input tables
+## Preprocess data, write TAF input tables
 
-## Before: stockobject.Rdata (ftp)
+## Before: stockobject.Rdata (TAF database)
 ## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
 ##         survey_uk.csv, survey_fr.csv (data)
 
