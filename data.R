@@ -1,8 +1,9 @@
 ## Preprocess data, write TAF input tables
 
 ## Before: stockobject.Rdata (TAF database)
-## After:  latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
-##         survey_uk.csv, survey_fr.csv (data)
+## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.Rdata,
+##         survey_fr.csv, survey_uk.csv, wdiscards.csv, wlandings.csv,
+##         wstock.csv (data)
 
 suppressMessages(library(FLCore))
 library(methods)
