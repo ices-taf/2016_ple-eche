@@ -1,7 +1,7 @@
 ## Upload raw data to TAF database
 
-## Before: catageysa.dat (user dir)
-## After:  catageysa.dat (TAF database)
+## Before: PLE7DFleet_2016.txt, stockobject.Rdata (user dir)
+## After:  PLE7DFleet_2016.txt, stockobject.Rdata (TAF database)
 
 library(icesTAF)
 
