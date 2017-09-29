@@ -15,6 +15,7 @@ mkdir("input")
 
 ## Get stock data
 load("data/stockobject.Rdata")
+unlink("data/stockobject.Rdata")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -23,6 +24,7 @@ stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
 indices <- readFLIndices("data/PLE7DFleet_2016.txt", na.strings="-1")
+unlink("data/PLE7DFleet_2016.txt")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Write model input files
