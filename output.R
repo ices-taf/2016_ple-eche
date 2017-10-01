@@ -9,8 +9,8 @@ suppressMessages(library(FLCore))
 
 mkdir("output")
 
-load("input/input.RData")
-load("model/results.RData")
+load("input/input.RData")    # obs
+load("model/results.RData")  # fit
 
 minyear <- range(stock)[["minyear"]]
 maxyear <- range(stock)[["maxyear"]]
