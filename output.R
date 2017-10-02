@@ -46,7 +46,7 @@ natage <- flr2taf(results@stock.n)
 
 ## Summary by year
 year <- minyear:maxyear
-rec <- stock.n(stock)[1, drop=TRUE]
+rec <- stock.n(stock)[1,][drop=TRUE]
 ssb <- apply(stock.n(stock) * stock.wt(stock) * mat(stock), 2, sum)[drop=TRUE]
 catch <- catch(stock)[drop=TRUE]
 landings <- landings(stock)[drop=TRUE]
