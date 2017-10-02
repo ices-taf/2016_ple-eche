@@ -1,7 +1,7 @@
 ## Run analysis, write model results
 
 ## Before: sole (TAF database), assess.dat, input.RData (input)
-## After:  results.RData, sole.rep, sole.std (model)
+## After:  input.RData, results.RData, sole.rep, sole.std (model)
 
 library(icesTAF)
 suppressMessages(library(FLAssess))
