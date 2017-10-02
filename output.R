@@ -1,21 +1,22 @@
 ## Extract model results of interest, write TAF output tables
 
 ## Before: input.RData, results.RData, sole.rep, sole.std (model)
-## After:  res_landings.csv, res_discards.csv, res_survey_uk.csv,
-##         res_survey_fr.csv, fatage.csv, natage.csv, summary.csv (output)
+## After:  fatage.csv, natage.csv, output.RData, res_discards.csv,
+##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
+##         summary.csv (output)
 
 library(icesTAF)
 suppressMessages(library(FLCore))
 
 mkdir("output")
 
-load("input/input.RData")    # obs
-load("model/results.RData")  # fit
+load("model/input.RData")    # obs -> stock.orig
+load("model/results.RData")  # fit -> stock
 
 minyear <- range(stock)[["minyear"]]
 maxyear <- range(stock)[["maxyear"]]
 
-## Update stock object
+## Update stock object, save output.RData
 stock.orig <- stock
 harvest(stock) <- results@harvest
 stock.n(stock) <- results@stock.n
@@ -33,6 +34,7 @@ catch(stock) <- discards(stock) + landings(stock)
 catch.n(stock) <- landings.n(stock) + discards.n(stock)
 catch.wt(stock) <- (landings.wt(stock)*landings.n(stock) + discards.wt(stock)*discards.n(stock)) /
                    (landings.n(stock)+discards.n(stock))
+save(control, indices, results, stock, stock.orig, file="output/output.RData")
 
 ## Residuals
 res_landings <- flr2taf(log1p(landings.n(stock.orig)) - log(results@landings.n))
