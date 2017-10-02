@@ -32,4 +32,4 @@ control <- FLAAP.control(pGrp=1, qplat.surveys=5, qplat.Fmatrix=6,
                          Fage.knots=4, Ftime.knots=14, Wtime.knots=5, mcmc=FALSE)
 path <- "input"
 suppressWarnings(assessment(stock, indices, control, input=TRUE, model=FALSE))
-save(stock, indices, control, file="input/input.RData")
+save(control, indices, stock, file="input/input.RData")
