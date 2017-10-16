@@ -47,15 +47,23 @@ fatage <- flr2taf(results@harvest)
 natage <- flr2taf(results@stock.n)
 
 ## Summary by year
-year <- minyear:maxyear
-rec <- stock.n(stock)[1,][drop=TRUE]
-ssb <- apply(stock.n(stock) * stock.wt(stock) * mat(stock), 2, sum)[drop=TRUE]
-catch <- catch(stock)[drop=TRUE]
-landings <- landings(stock)[drop=TRUE]
-bio <- stock(stock)[drop=TRUE]
-fbar <- apply(results@harvest[3:6], 2, mean)[drop=TRUE]
-summary <- data.frame(Year=year, Rec=rec, SSB=ssb, Catch=catch,
-                      Landings=landings, Biomass=bio, Fbar=fbar)
+Year <- minyear:maxyear
+Rec <- stock.n(stock)[1,][drop=TRUE]
+SSB <- apply(stock.n(stock) * stock.wt(stock) * mat(stock), 2, sum)[drop=TRUE]
+Catch <- catch(stock)[drop=TRUE]
+Landings <- landings(stock)[drop=TRUE]
+Discards <- Catch - Landings
+Biomass <- stock(stock)[drop=TRUE]
+Fbar <- apply(results@harvest[3:6], 2, mean)[drop=TRUE]
+ci <- function(x) data.frame(lo=x$mean-2*x$stddev, hi=x$mean+2*x$stddev)
+Rec_lo <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",][1:length(Year),]))$lo
+Rec_hi <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",][1:length(Year),]))$hi
+SSB_lo <- ci(results@stdfile[results@stdfile$name=="SSB",])$lo
+SSB_hi <- ci(results@stdfile[results@stdfile$name=="SSB",])$hi
+Fbar_lo <- ci(results@stdfile[results@stdfile$name=="Fbar",])$lo
+Fbar_hi <- ci(results@stdfile[results@stdfile$name=="Fbar",])$hi
+summary <- data.frame(Year, Rec, SSB, Catch, Landings, Discards, Biomass, Fbar,
+                      Rec_lo, Rec_hi, SSB_lo, SSB_hi, Fbar_lo, Fbar_hi)
 
 ## Write tables to output directory
 write.taf(res_landings, "output/res_landings.csv")   # 3.1.2a
