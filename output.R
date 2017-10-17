@@ -62,8 +62,8 @@ SSB_lo <- ci(results@stdfile[results@stdfile$name=="SSB",])$lo
 SSB_hi <- ci(results@stdfile[results@stdfile$name=="SSB",])$hi
 Fbar_lo <- ci(results@stdfile[results@stdfile$name=="Fbar",])$lo
 Fbar_hi <- ci(results@stdfile[results@stdfile$name=="Fbar",])$hi
-summary <- data.frame(Year, Rec, SSB, Catch, Landings, Discards, Biomass, Fbar,
-                      Rec_lo, Rec_hi, SSB_lo, SSB_hi, Fbar_lo, Fbar_hi)
+summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
+                      Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
 ## Write tables to output directory
 write.taf(res_landings, "output/res_landings.csv")   # 3.1.2a
