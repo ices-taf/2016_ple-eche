@@ -25,22 +25,26 @@ stock(stock) <- apply(stock.n(stock) * stock.wt(stock), 2, sum)
 discards.n(stock) <- results@discards.n
 stock@discards.wt[,ac(minyear:2005)] <-
   apply(stock@discards.wt[,ac(2006:maxyear)], 1, mean, na.rm=TRUE)
-stock@discards.wt[7, ac(c(2006,2007,2008,2012))] <- mean(stock@discards.wt[7,], na.rm=TRUE)
+stock@discards.wt[7, ac(c(2006,2007,2008,2012))] <-
+  mean(stock@discards.wt[7,], na.rm=TRUE)
 landings.n(stock) <- results@landings.n
 landings.wt(stock) <- results@landings.wt
 landings(stock) <- apply(landings.n(stock) * landings.wt(stock), 2, sum)
 discards(stock) <- apply(discards.n(stock) * discards.wt(stock), 2, sum)
 catch(stock) <- discards(stock) + landings(stock)
 catch.n(stock) <- landings.n(stock) + discards.n(stock)
-catch.wt(stock) <- (landings.wt(stock)*landings.n(stock) + discards.wt(stock)*discards.n(stock)) /
+catch.wt(stock) <- (landings.wt(stock)*landings.n(stock) +
+                    discards.wt(stock)*discards.n(stock)) /
                    (landings.n(stock)+discards.n(stock))
 save(control, indices, results, stock, stock.orig, file="output/output.RData")
 
 ## Residuals
 res_landings <- flr2taf(log1p(landings.n(stock.orig)) - log(results@landings.n))
 res_discards <- flr2taf(log1p(discards.n(stock.orig)) - log(results@discards.n))
-res_survey_uk <- flr2taf(trim(results@index.res[[1]], age=1:6, year=1989:maxyear))
-res_survey_fr <- flr2taf(trim(results@index.res[[2]], age=1:6, year=1993:maxyear))
+res_survey_uk <- flr2taf(trim(results@index.res[[1]],
+                              age=1:6, year=1989:maxyear))
+res_survey_fr <- flr2taf(trim(results@index.res[[2]],
+                              age=1:6, year=1993:maxyear))
 
 ## Fishing mortality and numbers at age
 fatage <- flr2taf(results@harvest)
@@ -56,8 +60,10 @@ Discards <- Catch - Landings
 Biomass <- stock(stock)[drop=TRUE]
 Fbar <- apply(results@harvest[3:6], 2, mean)[drop=TRUE]
 ci <- function(x) data.frame(lo=x$mean-2*x$stddev, hi=x$mean+2*x$stddev)
-Rec_lo <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",][1:length(Year),]))$lo
-Rec_hi <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",][1:length(Year),]))$hi
+Rec_lo <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",]
+                 [1:length(Year),]))$lo
+Rec_hi <- exp(ci(results@stdfile[results@stdfile$name=="log_initpop",]
+                 [1:length(Year),]))$hi
 SSB_lo <- ci(results@stdfile[results@stdfile$name=="SSB",])$lo
 SSB_hi <- ci(results@stdfile[results@stdfile$name=="SSB",])$hi
 Fbar_lo <- ci(results@stdfile[results@stdfile$name=="Fbar",])$lo

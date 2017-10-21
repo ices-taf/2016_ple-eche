@@ -28,8 +28,8 @@ unlink("data/PLE7DFleet_2016.txt")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Write model input files
-control <- FLAAP.control(pGrp=1, qplat.surveys=5, qplat.Fmatrix=6,
-                         Fage.knots=4, Ftime.knots=14, Wtime.knots=5, mcmc=FALSE)
+control <- FLAAP.control(pGrp=1, qplat.surveys=5, qplat.Fmatrix=6, Fage.knots=4,
+                         Ftime.knots=14, Wtime.knots=5, mcmc=FALSE)
 path <- "input"
 suppressWarnings(assessment(stock, indices, control, input=TRUE, model=FALSE))
 save(control, indices, stock, file="input/input.RData")

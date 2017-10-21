@@ -26,5 +26,6 @@ cp("input/input.RData", "model") # required by output.R
 
 ## Run model
 path <- "model"  # required inside assessment() function
-suppressWarnings(results <- assessment(stock, indices, control, input=FALSE, model=TRUE))
+suppressWarnings(results <-
+                   assessment(stock, indices, control, input=FALSE, model=TRUE))
 save(results, file="model/results.RData")
