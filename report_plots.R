@@ -5,7 +5,7 @@
 
 library(icesTAF)
 library(areaplot)
-suppressMessages(library(gplots))
+library(plotrix)
 
 mkdir("report")
 
