@@ -48,7 +48,7 @@ dev.off()
 
 tafpng("recruitment.png")
 mid <- barplot(x$Rec, names=x$Year, ylim=lim(x$Rec_hi),
-               ylab="Recruitment (thousands)", main="Recruitment (age 1)",
+               ylab="Recruitment (millions)", main="Recruitment (age 1)",
                col=taf.dark)
 plotCI(mid, x$Rec, li=x$Rec_lo, ui=x$Rec_hi, gap=0, pch=NA, sfrac=0.005,
        lwd=2, col=taf.light, add=TRUE)
