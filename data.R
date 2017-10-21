@@ -1,4 +1,4 @@
-## Preprocess data, write TAF input tables
+## Preprocess data, write TAF data tables
 
 ## Before: PLE7DFleet_2016.txt, stockobject.Rdata (TAF database)
 ## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.Rdata,
