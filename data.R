@@ -37,6 +37,13 @@ stock.wt <- flr2taf(stock@stock.wt); stock.wt[stock.wt==0] <- NA
 survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
+## Rename plus group
+names(landings.n)[names(landings.n)=="7"] <- "7+"
+names(landings.wt)[names(landings.wt)=="7"] <- "7+"
+names(discards.n)[names(discards.n)=="7"] <- "7+"
+names(discards.wt)[names(discards.wt)=="7"] <- "7+"
+names(stock.wt)[names(stock.wt)=="7"] <- "7+"
+
 ## Write tables to data directory
 write.taf(landings.n, "latage.csv")     # 2.3.1
 write.taf(landings.wt, "wlandings.csv") # 2.3.2

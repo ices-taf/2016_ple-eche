@@ -71,6 +71,12 @@ Fbar_hi <- ci(results@stdfile[results@stdfile$name=="Fbar",])$hi
 summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
                       Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
+## Rename plus group
+names(res_landings)[names(res_landings)=="7"] <- "7+"
+names(res_discards)[names(res_discards)=="7"] <- "7+"
+names(fatage)[names(fatage)=="7"] <- "7+"
+names(natage)[names(natage)=="7"] <- "7+"
+
 ## Write tables to output directory
 write.taf(res_landings, "output/res_landings.csv")   # 3.1.2a
 write.taf(res_discards, "output/res_discards.csv")   # 3.1.2b
