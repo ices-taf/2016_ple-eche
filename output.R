@@ -1,4 +1,4 @@
-## Extract model results of interest, write TAF output tables
+## Extract results of interest, write TAF output tables
 
 ## Before: input.RData, results.RData, sole.rep, sole.std (model)
 ## After:  fatage.csv, natage.csv, output.RData, res_discards.csv,
