@@ -53,7 +53,10 @@ res_discards <- read.taf("output/res_discards.csv")
 res_discards <- na.omit(res_discards)
 write.taf(res_discards, "report/res_discards.csv")
 
-## summary (round)
+## summary (trim columns, round)
 summary <- read.taf("output/summary.csv")
-summary <- as.data.frame(mapply(round, summary, digits=c(0,0,0,0,0,0,5)))
+summary <- summary[c("Year","SSB","Catch","Landings","Biomass","Fbar")]
+summary <- rnd(summary, c("SSB","Catch","Landings","Biomass"))
+summary <- rnd(summary, "Fbar", 5)
+names(summary)[names(summary)=="Biomass"] <- "Total Biomass"
 write.taf(summary, "report/summary.csv")
