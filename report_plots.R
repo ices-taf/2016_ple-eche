@@ -10,7 +10,7 @@ mkdir("report")
 
 ## Change unit
 summary <- read.taf("output/summary.csv")
-x <- div(summary, c("SSB","SSB_lo","SSB_hi"))
+x <- div(summary, "SSB", grep=TRUE)
 
 ## Plots
 tafpng("f_mortality")
