@@ -20,7 +20,7 @@ lines(x$Year, x$SSB)
 dev.off()
 
 tafpng("f_mortality")
-confplot(x[c("Year","Fbar_lo","Fbar_hi")], ylim=lim(x$Fbar_hi,1.3), yaxs="i",
+confplot(x[c("Year","Fbar_lo","Fbar_hi")], ylim=lim(x$Fbar_hi), yaxs="i",
          ylab="Fbar (3-6)", main="Fishing mortality")
 lines(x$Year, x$Fbar)
 dev.off()
