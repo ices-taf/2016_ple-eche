@@ -8,7 +8,7 @@ suppressMessages(library(FLAssess))
 library(splines)
 suppressMessages(library(mgcv))
 library(methods)
-source("utilities.R", local=TRUE)
+source("utilities.R")
 
 url <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/model/"
 

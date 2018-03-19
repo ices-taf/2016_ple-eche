@@ -8,7 +8,7 @@ suppressMessages(library(FLAssess))
 library(splines)
 suppressMessages(library(mgcv))
 library(methods)
-source("utilities.R", local=TRUE)
+source("utilities.R")
 
 mkdir("input")
 
