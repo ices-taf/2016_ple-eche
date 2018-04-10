@@ -1,6 +1,6 @@
 ## Convert data to model format, write model input files
 
-## Before: stockobject.Rdata, PLE7DFleet_2016.txt (data)
+## Before: stockobject.RData, PLE7DFleet_2016.txt (data)
 ## After:  assess.dat, input.RData (input)
 
 library(icesTAF)
@@ -13,8 +13,8 @@ source("utilities.R")
 mkdir("input")
 
 ## Get stock data
-load("data/stockobject.Rdata")
-unlink("data/stockobject.Rdata")
+load("data/stockobject.RData")
+unlink("data/stockobject.RData")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)

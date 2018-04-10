@@ -1,7 +1,7 @@
 ## Preprocess data, write TAF data tables
 
-## Before: PLE7DFleet_2016.txt, stockobject.Rdata (TAF database)
-## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.Rdata,
+## Before: PLE7DFleet_2016.txt, stockobject.RData (TAF database)
+## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.RData,
 ##         survey_fr.csv, survey_uk.csv, wdiscards.csv, wlandings.csv,
 ##         wstock.csv (data)
 
@@ -15,8 +15,8 @@ mkdir("data")
 
 ## Get stock data
 setwd("data")
-download(paste0(url,"stockobject.Rdata"))  # later removed by input.R
-load("stockobject.Rdata")
+download(paste0(url,"stockobject.RData"))  # later removed by input.R
+load("stockobject.RData")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
