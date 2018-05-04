@@ -1,6 +1,6 @@
 ## Preprocess data, write TAF data tables
 
-## Before: PLE7DFleet_2016.txt, stockobject.RData (TAF database)
+## Before: PLE7DFleet_2016.txt, stockobject.RData (begin/data)
 ## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.RData,
 ##         survey_fr.csv, survey_uk.csv, wdiscards.csv, wlandings.csv,
 ##         wstock.csv (data)
@@ -9,14 +9,11 @@ suppressMessages(library(FLCore))
 library(methods)
 library(icesTAF)
 
-url <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/raw/"
-
 mkdir("data")
 
 ## Get stock data
-setwd("data")
-download(paste0(url,"stockobject.RData"))  # later removed by input.R
-load("stockobject.RData")
+cp("begin/data/stockobject.RData", "data")  # later removed by input.R
+load("data/stockobject.RData")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -24,8 +21,8 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-download(paste0(url,"PLE7DFleet_2016.txt"))  # later removed by input.R
-indices <- readFLIndices("PLE7DFleet_2016.txt", na.strings="-1")
+cp("begin/data/PLE7DFleet_2016.txt", "data")  # later removed by input.R
+indices <- readFLIndices("data/PLE7DFleet_2016.txt", na.strings="-1")
 indices[[2]] <- trim(indices[[2]], age=1:6)
 
 ## Extract tables
@@ -45,6 +42,7 @@ names(discards.wt)[names(discards.wt)=="7"] <- "7+"
 names(stock.wt)[names(stock.wt)=="7"] <- "7+"
 
 ## Write tables to data directory
+setwd("data")
 write.taf(landings.n, "latage.csv")     # 2.3.1
 write.taf(landings.wt, "wlandings.csv") # 2.3.2
 write.taf(discards.n, "datage.csv")     # 2.3.3

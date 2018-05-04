@@ -1,6 +1,6 @@
 ## Run analysis, write model results
 
-## Before: sole (TAF database), assess.dat, input.RData (input)
+## Before: sole (begin/model), assess.dat, input.RData (input)
 ## After:  input.RData, results.RData, sole.rep, sole.std (model)
 
 library(icesTAF)
@@ -10,13 +10,11 @@ suppressMessages(library(mgcv))
 library(methods)
 source("utilities.R")
 
-url <- "https://raw.githubusercontent.com/ices-taf/ftp/master/wgnssk/2016/ple-eche/model/"
-
 mkdir("model")
 
 ## Get model executable
 sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
-download(paste0(url,sole), "model")
+cp(paste0("begin/model/",sole), "model")
 
 ## Get model input files
 cp("input/assess.dat", "model") # required by executable
