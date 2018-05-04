@@ -17,9 +17,9 @@ sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
 cp(paste0("begin/model/",sole), "model")
 
 ## Get model input files
-cp("input/assess.dat", "model") # required by executable
+cp("input/assess.dat", "model")  # required by executable
 load("input/input.RData")
-cp("input/input.RData", "model") # required by output.R
+cp("input/input.RData", "model")  # required by output.R
 
 ## Run model
 path <- "model"  # required inside assessment() function

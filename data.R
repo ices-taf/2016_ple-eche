@@ -43,11 +43,11 @@ names(stock.wt)[names(stock.wt)=="7"] <- "7+"
 
 ## Write tables to data directory
 setwd("data")
-write.taf(landings.n, "latage.csv")     # 2.3.1
-write.taf(landings.wt, "wlandings.csv") # 2.3.2
-write.taf(discards.n, "datage.csv")     # 2.3.3
-write.taf(discards.wt, "wdiscards.csv") # 2.3.4
-write.taf(stock.wt, "wstock.csv")       # 2.3.5
-write.taf(survey.uk, "survey_uk.csv")   # 2.6.1a
-write.taf(survey.fr, "survey_fr.csv")   # 2.6.1b
+write.taf(landings.n, "latage.csv")      # 2.3.1
+write.taf(landings.wt, "wlandings.csv")  # 2.3.2
+write.taf(discards.n, "datage.csv")      # 2.3.3
+write.taf(discards.wt, "wdiscards.csv")  # 2.3.4
+write.taf(stock.wt, "wstock.csv")        # 2.3.5
+write.taf(survey.uk, "survey_uk.csv")    # 2.6.1a
+write.taf(survey.fr, "survey_fr.csv")    # 2.6.1b
 setwd("..")
