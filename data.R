@@ -5,9 +5,9 @@
 ##         survey_fr.csv, survey_uk.csv, wdiscards.csv, wlandings.csv,
 ##         wstock.csv (data)
 
+library(icesTAF)
 suppressMessages(library(FLCore))
 library(methods)
-library(icesTAF)
 
 mkdir("data")
 
