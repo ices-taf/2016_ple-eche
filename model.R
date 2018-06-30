@@ -14,7 +14,7 @@ mkdir("model")
 
 ## Get model executable
 sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
-cp(paste0("begin/model/",sole), "model")
+cp(file.path("begin/model",sole), "model")
 
 ## Get model input files
 cp("input/assess.dat", "model")  # required by executable
