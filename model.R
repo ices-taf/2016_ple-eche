@@ -1,6 +1,6 @@
 ## Run analysis, write model results
 
-## Before: sole (begin/model), assess.dat, input.RData (input)
+## Before: sole (begin/initial/model), assess.dat, input.RData (input)
 ## After:  input.RData, results.RData, sole.rep, sole.std (model)
 
 library(icesTAF)
@@ -14,7 +14,7 @@ mkdir("model")
 
 ## Get model executable
 sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
-cp(file.path("begin/model",sole), "model")
+cp(file.path("begin/initial/model",sole), "model")
 
 ## Get model input files
 cp("input/assess.dat", "model")  # required by executable
