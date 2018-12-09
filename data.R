@@ -1,19 +1,21 @@
 ## Preprocess data, write TAF data tables
 
-## Before: PLE7DFleet_2016.txt, stockobject.RData (begin/initial/data)
-## After:  datage.csv, latage.csv, PLE7DFleet_2016.txt, stockobject.RData,
-##         survey_fr.csv, survey_uk.csv, wdiscards.csv, wlandings.csv,
-##         wstock.csv (data)
+## Before: PLE7DFleet_2016.txt, stockobject.RData (bootstrap/data)
+## After:  assess.dat, datage.csv, input.RData, latage.csv, survey_fr.csv,
+##         survey_uk.csv, wdiscards.csv, wlandings.csv, wstock.csv (data)
 
 library(icesTAF)
-suppressMessages(library(FLCore))
+taf.library()
+suppressMessages(library(FLAssess))
+library(splines)
+suppressMessages(library(mgcv))
 library(methods)
+source("utilities.R")
 
 mkdir("data")
 
 ## Get stock data
-cp("begin/initial/data/stockobject.RData", "data")  # later removed by input.R
-load("data/stockobject.RData")
+load("bootstrap/data/stockobject.RData")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -21,9 +23,8 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-cp("begin/initial/data/PLE7DFleet_2016.txt", "data")  # later removed by input.R
-indices <- readFLIndices("data/PLE7DFleet_2016.txt", na.strings="-1")
-indices[[2]] <- trim(indices[[2]], age=1:6)
+indices <- readFLIndices("bootstrap/data/PLE7DFleet_2016.txt", na.strings="-1")
+indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Extract tables
 landings.n <- flr2taf(stock@landings.n)
@@ -35,11 +36,11 @@ survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
 ## Rename plus group
-names(landings.n)[names(landings.n)=="7"] <- "7+"
-names(landings.wt)[names(landings.wt)=="7"] <- "7+"
-names(discards.n)[names(discards.n)=="7"] <- "7+"
-names(discards.wt)[names(discards.wt)=="7"] <- "7+"
-names(stock.wt)[names(stock.wt)=="7"] <- "7+"
+landings.n <- plus(landings.n)
+landings.wt <- plus(landings.wt)
+discards.n <- plus(discards.n)
+discards.wt <- plus(discards.wt)
+stock.wt <- plus(stock.wt)
 
 ## Write tables to data directory
 setwd("data")
@@ -51,3 +52,10 @@ write.taf(stock.wt, "wstock.csv")        # 2.3.5
 write.taf(survey.uk, "survey_uk.csv")    # 2.6.1a
 write.taf(survey.fr, "survey_fr.csv")    # 2.6.1b
 setwd("..")
+
+## Write model input files
+control <- FLAAP.control(pGrp=1, qplat.surveys=5, qplat.Fmatrix=6, Fage.knots=4,
+                         Ftime.knots=14, Wtime.knots=5, mcmc=FALSE)
+path <- "data"  # required inside assessment() function
+suppressWarnings(assessment(stock, indices, control, input=TRUE, model=FALSE))
+save(control, indices, stock, file="data/input.RData")
