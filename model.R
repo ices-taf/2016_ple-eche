@@ -1,9 +1,10 @@
 ## Run analysis, write model results
 
-## Before: sole (begin/initial/model), assess.dat, input.RData (input)
+## Before: sole (bootstrap/software), assess.dat, input.RData (data)
 ## After:  input.RData, results.RData, sole.rep, sole.std (model)
 
 library(icesTAF)
+taf.library()
 suppressMessages(library(FLAssess))
 library(splines)
 suppressMessages(library(mgcv))
@@ -13,13 +14,12 @@ source("utilities.R")
 mkdir("model")
 
 ## Get model executable
-sole <- if(.Platform$OS.type == "unix") "sole" else "sole.exe"
-cp(file.path("begin/initial/model",sole), "model")
+exefile <- if(os.unix()) "sole" else "sole.exe"
+taf.unzip("bootstrap/software/sole.zip", files=exefile, exdir="model")
 
 ## Get model input files
-cp("input/assess.dat", "model")  # required by executable
-load("input/input.RData")
-cp("input/input.RData", "model")  # required by output.R
+cp("data/assess.dat", "model")  # required by executable
+load("data/input.RData")
 
 ## Run model
 path <- "model"  # required inside assessment() function
