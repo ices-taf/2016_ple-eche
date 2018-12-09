@@ -1,16 +1,17 @@
 ## Extract results of interest, write TAF output tables
 
-## Before: input.RData, results.RData, sole.rep, sole.std (model)
+## Before: input.RData (data), results.RData, sole.rep, sole.std (model)
 ## After:  fatage.csv, natage.csv, output.RData, res_discards.csv,
 ##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
 ##         summary.csv (output)
 
 library(icesTAF)
+taf.library()
 suppressMessages(library(FLCore))
 
 mkdir("output")
 
-load("model/input.RData")    # obs -> stock.orig
+load("data/input.RData")     # obs -> stock.orig
 load("model/results.RData")  # fit -> stock
 
 minyear <- range(stock)[["minyear"]]
@@ -72,16 +73,18 @@ summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
                       Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
 ## Rename plus group
-names(res_landings)[names(res_landings)=="7"] <- "7+"
-names(res_discards)[names(res_discards)=="7"] <- "7+"
-names(fatage)[names(fatage)=="7"] <- "7+"
-names(natage)[names(natage)=="7"] <- "7+"
+res_landings <- plus(res_landings)
+res_discards <- plus(res_discards)
+fatage <- plus(fatage)
+natage <- plus(natage)
 
 ## Write tables to output directory
-write.taf(res_landings, "output/res_landings.csv")    # 3.1.2a
-write.taf(res_discards, "output/res_discards.csv")    # 3.1.2b
-write.taf(res_survey_uk, "output/res_survey_uk.csv")  # 3.1.3a
-write.taf(res_survey_fr, "output/res_survey_fr.csv")  # 3.1.3b
-write.taf(fatage, "output/fatage.csv")    # 3.1.4a
-write.taf(natage, "output/natage.csv")    # 3.1.4b
-write.taf(summary, "output/summary.csv")  # 3.1.6
+setwd("output")
+write.taf(res_landings)   # 3.1.2a
+write.taf(res_discards)   # 3.1.2b
+write.taf(res_survey_uk)  # 3.1.3a
+write.taf(res_survey_fr)  # 3.1.3b
+write.taf(fatage)         # 3.1.4a
+write.taf(natage)         # 3.1.4b
+write.taf(summary)        # 3.1.6
+setwd("..")
