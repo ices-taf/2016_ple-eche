@@ -19,7 +19,7 @@ confplot(x[c("Year","SSB_lo","SSB_hi")], ylim=lim(x$SSB_hi), yaxs="i",
 lines(x$Year, x$SSB)
 dev.off()
 
-taf.png("f_mortality")
+taf.png("fbar")
 confplot(x[c("Year","Fbar_lo","Fbar_hi")], ylim=lim(x$Fbar_hi), yaxs="i",
          ylab="Fbar (3-6)", main="Fishing mortality")
 lines(x$Year, x$Fbar)
