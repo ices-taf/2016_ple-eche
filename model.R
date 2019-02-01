@@ -14,7 +14,7 @@ source("utilities.R")
 mkdir("model")
 
 ## Get model executable
-exefile <- if(os.unix()) "sole" else "sole.exe"
+exefile <- if(os.linux()) "sole" else "sole.exe"
 taf.unzip("bootstrap/software/sole.zip", files=exefile, exdir="model")
 
 ## Get model input files
