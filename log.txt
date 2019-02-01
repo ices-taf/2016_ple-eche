@@ -1,0 +1,18 @@
+Started analysis @ 09:50:10, 15 December 2018running
+  'D:\programs\R\R-3.5\bin\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll()'
+
+[09:50:10] data.R running...
+Error in library(FLAssess) : there is no package called 'FLAssess'
+[09:50:10]   data.R failed
+[09:50:10] model.R running...
+Error in library(FLAssess) : there is no package called 'FLAssess'
+[09:50:10]   model.R failed
+[09:50:10] output.R running...
+Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
+In addition: Warning message:
+In readChar(con, 5L, useBytes = TRUE) :
+  cannot open compressed file 'data/input.RData', probable reason 'No such file or directory'
+[09:50:12]   output.R failed
+[09:50:12] report.R running...
+Error in library(areaplot) : there is no package called 'areaplot'
+[09:50:12]   report.R failed
