@@ -1,23 +1,23 @@
-Started analysis @ 20:43:08, 07 March 2019
+Started analysis @ 11:34:59, 09 March 2019
 running
   'D:\programs\R\R-3.5.2\bin\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll()'
 
-[20:43:09] data.R running...
+[11:35:00] data.R running...
 Error in library(FLAssess) : there is no package called 'FLAssess'
-[20:43:09]   data.R failed
-[20:43:09] model.R running...
+[11:35:00]   data.R failed
+[11:35:00] model.R running...
 Error in library(FLAssess) : there is no package called 'FLAssess'
-[20:43:09]   model.R failed
-[20:43:09] output.R running...
+[11:35:00]   model.R failed
+[11:35:00] output.R running...
 Error in readChar(con, 5L, useBytes = TRUE) : cannot open the connection
 In addition: Warning message:
 In readChar(con, 5L, useBytes = TRUE) :
   cannot open compressed file 'data/input.RData', probable reason 'No such file or directory'
-[20:43:11]   output.R failed
-[20:43:11] report.R running...
+[11:35:02]   output.R failed
+[11:35:02] report.R running...
 Error in file(file, "rt", encoding = fileEncoding) : 
   cannot open the connection
 In addition: Warning message:
 In file(file, "rt", encoding = fileEncoding) :
   cannot open file 'output/summary.csv': No such file or directory
-[20:43:11]   report.R failed
+[11:35:02]   report.R failed
