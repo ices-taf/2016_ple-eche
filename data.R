@@ -26,30 +26,30 @@ indices <- readFLIndices("bootstrap/data/PLE7DFleet_2016.txt", na.strings="-1")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Extract tables
-landings.n <- flr2taf(stock@landings.n)
-landings.wt <- flr2taf(stock@landings.wt); landings.wt[landings.wt==0] <- NA
-discards.n <- flr2taf(stock@discards.n)
-discards.wt <- flr2taf(stock@discards.wt); discards.wt[discards.wt==0] <- NA
-stock.wt <- flr2taf(stock@stock.wt); stock.wt[stock.wt==0] <- NA
+latage <- flr2taf(stock@landings.n)
+wlandings <- flr2taf(stock@landings.wt); wlandings[wlandings==0] <- NA
+datage <- flr2taf(stock@discards.n)
+wdiscards <- flr2taf(stock@discards.wt); wdiscards[wdiscards==0] <- NA
+wstock <- flr2taf(stock@stock.wt); wstock[wstock==0] <- NA
 survey.uk <- flr2taf(indices[[1]]@index)
 survey.fr <- flr2taf(indices[[2]]@index)
 
 ## Rename plus group
-landings.n <- plus(landings.n)
-landings.wt <- plus(landings.wt)
-discards.n <- plus(discards.n)
-discards.wt <- plus(discards.wt)
-stock.wt <- plus(stock.wt)
+latage <- plus(latage)
+wlandings <- plus(wlandings)
+datage <- plus(datage)
+wdiscards <- plus(wdiscards)
+wstock <- plus(wstock)
 
 ## Write tables to data directory
 setwd("data")
-write.taf(landings.n, "latage.csv")      # 2.3.1
-write.taf(landings.wt, "wlandings.csv")  # 2.3.2
-write.taf(discards.n, "datage.csv")      # 2.3.3
-write.taf(discards.wt, "wdiscards.csv")  # 2.3.4
-write.taf(stock.wt, "wstock.csv")        # 2.3.5
-write.taf(survey.uk, "survey_uk.csv")    # 2.6.1a
-write.taf(survey.fr, "survey_fr.csv")    # 2.6.1b
+write.taf(latage)     # 2.3.1
+write.taf(wlandings)  # 2.3.2
+write.taf(datage)     # 2.3.3
+write.taf(wdiscards)  # 2.3.4
+write.taf(wstock)     # 2.3.5
+write.taf(survey.uk)  # 2.6.1a
+write.taf(survey.fr)  # 2.6.1b
 setwd("..")
 
 ## Write model input files
