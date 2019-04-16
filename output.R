@@ -39,11 +39,11 @@ catch.wt(stock) <- (landings.wt(stock)*landings.n(stock) +
 save(control, indices, results, stock, stock.orig, file="output/output.RData")
 
 ## Residuals
-res_landings <- flr2taf(log1p(landings.n(stock.orig)) - log(results@landings.n))
-res_discards <- flr2taf(log1p(discards.n(stock.orig)) - log(results@discards.n))
-res_survey_uk <- flr2taf(trim(results@index.res[[1]],
+res.landings <- flr2taf(log1p(landings.n(stock.orig)) - log(results@landings.n))
+res.discards <- flr2taf(log1p(discards.n(stock.orig)) - log(results@discards.n))
+res.survey_uk <- flr2taf(trim(results@index.res[[1]],
                               age=1:6, year=1989:maxyear))
-res_survey_fr <- flr2taf(trim(results@index.res[[2]],
+res.survey_fr <- flr2taf(trim(results@index.res[[2]],
                               age=1:6, year=1993:maxyear))
 
 ## Fishing mortality and numbers at age
@@ -72,17 +72,17 @@ summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
                       Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
 ## Rename plus group
-res_landings <- plus(res_landings)
-res_discards <- plus(res_discards)
+res.landings <- plus(res.landings)
+res.discards <- plus(res.discards)
 fatage <- plus(fatage)
 natage <- plus(natage)
 
 ## Write tables to output directory
 setwd("output")
-write.taf(res_landings)   # 3.1.2a
-write.taf(res_discards)   # 3.1.2b
-write.taf(res_survey_uk)  # 3.1.3a
-write.taf(res_survey_fr)  # 3.1.3b
+write.taf(res.landings)   # 3.1.2a
+write.taf(res.discards)   # 3.1.2b
+write.taf(res.survey_uk)  # 3.1.3a
+write.taf(res.survey_fr)  # 3.1.3b
 write.taf(fatage)         # 3.1.4a
 write.taf(natage)         # 3.1.4b
 write.taf(summary)        # 3.1.6
