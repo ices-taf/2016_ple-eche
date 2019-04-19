@@ -1,10 +1,10 @@
-Started analysis @ 15:39:36, 16 April 2019
+Started analysis @ 08:26:01, 19 April 2019
 running
   '..LocalRinstallation..\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll();warnings()'
 
-[15:39:36] data.R running...
-[15:39:40]   data.R done
-[15:39:40] model.R running...
+[08:26:01] data.R running...
+[08:26:05]   data.R done
+[08:26:05] model.R running...
 
 Initial statistics: 129 variables; iteration 0; function evaluation 0; phase 1
 Function value  3.5086534e+004; maximum gradient component mag -8.7841e+005
@@ -261,8 +261,8 @@ Estimating row 131 out of 134 for hessian
 Estimating row 132 out of 134 for hessian
 Estimating row 133 out of 134 for hessian
 Estimating row 134 out of 134 for hessian
-[15:39:44]   model.R done
-[15:39:44] output.R running...
-[15:39:45]   output.R done
-[15:39:45] report.R running...
-[15:39:45]   report.R done
+[08:26:09]   model.R done
+[08:26:09] output.R running...
+[08:26:10]   output.R done
+[08:26:10] report.R running...
+[08:26:10]   report.R done
