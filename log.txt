@@ -1,10 +1,10 @@
-Started analysis @ 08:26:01, 19 April 2019
+Started analysis @ 14:27:35, 25 April 2019
 running
   '..LocalRinstallation..\x64\Rterm.exe --slave --no-restore -e icesTAF::sourceAll();warnings()'
 
-[08:26:01] data.R running...
-[08:26:05]   data.R done
-[08:26:05] model.R running...
+[14:27:36] data.R running...
+[14:27:39]   data.R done
+[14:27:39] model.R running...
 
 Initial statistics: 129 variables; iteration 0; function evaluation 0; phase 1
 Function value  3.5086534e+004; maximum gradient component mag -8.7841e+005
@@ -261,8 +261,14 @@ Estimating row 131 out of 134 for hessian
 Estimating row 132 out of 134 for hessian
 Estimating row 133 out of 134 for hessian
 Estimating row 134 out of 134 for hessian
-[08:26:09]   model.R done
-[08:26:09] output.R running...
-[08:26:10]   output.R done
-[08:26:10] report.R running...
-[08:26:10]   report.R done
+[14:27:44]   model.R done
+[14:27:44] output.R running...
+[14:27:44]   output.R done
+[14:27:44] report.R running...
+[14:27:44]   report.R done
+Warning messages:
+1: package 'icesTAF' was built under R version 3.5.3 
+2: package 'areaplot' was built under R version 3.5.3 
+Warning messages:
+1: package 'icesTAF' was built under R version 3.5.3
+2: package 'areaplot' was built under R version 3.5.3
