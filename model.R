@@ -14,7 +14,7 @@ mkdir("model")
 
 ## Get model executable
 exefile <- if(os.linux()) "sole" else "sole.exe"
-taf.unzip("bootstrap/software/sole.zip", files=exefile, exdir="model")
+cp(file.path("bootstrap/software/sole", exefile), "model")
 
 ## Get model input files
 cp("data/assess.dat", "model")  # required by executable
