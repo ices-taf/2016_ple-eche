@@ -1,6 +1,6 @@
 ## Preprocess data, write TAF data tables
 
-## Before: PLE7DFleet_2016.txt, stockobject.RData (bootstrap/data)
+## Before: PLE7DFleet_2016.txt, stockobject.RData (boot/data)
 ## After:  assess.dat, datage.csv, input.RData, latage.csv, survey_fr.csv,
 ##         survey_uk.csv, wdiscards.csv, wlandings.csv, wstock.csv (data)
 
@@ -14,7 +14,7 @@ source("utilities.R")
 mkdir("data")
 
 ## Get stock data
-load("bootstrap/data/stockobject.RData")
+load("boot/data/stockobject.RData")
 range(stock)["minfbar"] <- 3
 range(stock)["maxfbar"] <- 6
 stock <- trim(stock, age=1:10)
@@ -22,7 +22,7 @@ stock@catch.n <- stock@landings.n  # temporary, to setPlusGroup weights
 stock <- setPlusGroup(stock, 7)
 
 ## Get survey data
-indices <- readFLIndices("bootstrap/data/PLE7DFleet_2016.txt", na.strings="-1")
+indices <- readFLIndices("boot/data/PLE7DFleet_2016.txt", na.strings="-1")
 indices <- FLIndices(indices[[1]], trim(indices[[2]], age=1:6))
 
 ## Extract tables
