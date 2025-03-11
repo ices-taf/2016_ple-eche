@@ -72,18 +72,16 @@ summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
                       Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
 ## Rename plus group
-res.landings <- plus(res.landings)
-res.discards <- plus(res.discards)
 fatage <- plus(fatage)
 natage <- plus(natage)
+res.discards <- plus(res.discards)
+res.landings <- plus(res.landings)
 
 ## Write tables to output directory
-setwd("output")
-write.taf(res.landings)   # 3.1.2a
-write.taf(res.discards)   # 3.1.2b
-write.taf(res.survey_uk)  # 3.1.3a
-write.taf(res.survey_fr)  # 3.1.3b
-write.taf(fatage)         # 3.1.4a
-write.taf(natage)         # 3.1.4b
-write.taf(summary)        # 3.1.6
-setwd("..")
+write.taf(fatage, dir="output")
+write.taf(natage, dir="output")
+write.taf(res.discards, dir="output")
+write.taf(res.landings, dir="output")
+write.taf(res.survey_fr, dir="output")
+write.taf(res.survey_uk, dir="output")
+write.taf(summary, dir="output")
