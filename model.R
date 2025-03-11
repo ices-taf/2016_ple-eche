@@ -4,7 +4,7 @@
 ## After:  input.RData, results.RData, sole.rep, sole.std (model)
 
 library(icesTAF)
-suppressMessages(library(FLAssess))
+taf.library(FLAssess)
 library(splines)
 suppressMessages(library(mgcv))
 library(methods)

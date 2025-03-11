@@ -5,7 +5,7 @@
 ##         survey_uk.csv, wdiscards.csv, wlandings.csv, wstock.csv (data)
 
 library(icesTAF)
-suppressMessages(library(FLAssess))
+taf.library(FLAssess)
 library(splines)
 suppressMessages(library(mgcv))
 library(methods)

@@ -6,7 +6,7 @@
 ##         summary.csv (output)
 
 library(icesTAF)
-suppressMessages(library(FLCore))
+taf.library(FLCore)
 
 mkdir("output")
 
