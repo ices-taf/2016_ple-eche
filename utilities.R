@@ -1,4 +1,5 @@
-suppressMessages(library(FLAssess))
+library(icesTAF)
+taf.library(FLAssess)
 library(methods)
 
 setClass("FLAAP.control",
