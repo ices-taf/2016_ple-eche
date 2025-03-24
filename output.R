@@ -1,9 +1,9 @@
-## Extract results of interest, write TAF output tables
+# Extract results of interest, write TAF output tables
 
-## Before: input.RData (data), results.RData, sole.rep, sole.std (model)
-## After:  fatage.csv, natage.csv, output.RData, res_discards.csv,
-##         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
-##         summary.csv (output)
+# Before: input.RData (data), results.RData, sole.rep, sole.std (model)
+# After:  fatage.csv, natage.csv, output.RData, res_discards.csv,
+#         res_landings.csv, res_survey_fr.csv, res_survey_uk.csv,
+#         summary.csv (output)
 
 library(icesTAF)
 taf.library(FLCore)
@@ -16,7 +16,7 @@ load("model/results.RData")  # fit -> stock
 minyear <- range(stock)[["minyear"]]
 maxyear <- range(stock)[["maxyear"]]
 
-## Update stock object, save output.RData
+# Update stock object, save output.RData
 stock.orig <- stock
 harvest(stock) <- results@harvest
 stock.n(stock) <- results@stock.n
@@ -38,7 +38,7 @@ catch.wt(stock) <- (landings.wt(stock)*landings.n(stock) +
                    (landings.n(stock)+discards.n(stock))
 save(control, indices, results, stock, stock.orig, file="output/output.RData")
 
-## Residuals
+# Residuals
 res.landings <- flr2taf(log1p(landings.n(stock.orig)) - log(results@landings.n))
 res.discards <- flr2taf(log1p(discards.n(stock.orig)) - log(results@discards.n))
 res.survey_uk <- flr2taf(trim(results@index.res[[1]],
@@ -46,11 +46,11 @@ res.survey_uk <- flr2taf(trim(results@index.res[[1]],
 res.survey_fr <- flr2taf(trim(results@index.res[[2]],
                               age=1:6, year=1993:maxyear))
 
-## Fishing mortality and numbers at age
+# Fishing mortality and numbers at age
 fatage <- flr2taf(results@harvest)
 natage <- flr2taf(results@stock.n)
 
-## Summary by year
+# Summary by year
 Year <- minyear:maxyear
 Rec <- stock.n(stock)[1,][drop=TRUE]
 SSB <- apply(stock.n(stock) * stock.wt(stock) * mat(stock), 2, sum)[drop=TRUE]
@@ -71,13 +71,13 @@ Fbar_hi <- ci(results@stdfile[results@stdfile$name=="Fbar",])$hi
 summary <- data.frame(Year, Rec, Rec_lo, Rec_hi, SSB, SSB_lo, SSB_hi, Catch,
                       Landings, Discards, Biomass, Fbar, Fbar_lo, Fbar_hi)
 
-## Rename plus group
+# Rename plus group
 fatage <- plus(fatage)
 natage <- plus(natage)
 res.discards <- plus(res.discards)
 res.landings <- plus(res.landings)
 
-## Write tables to output directory
+# Write tables to output directory
 write.taf(fatage, dir="output")
 write.taf(natage, dir="output")
 write.taf(res.discards, dir="output")
