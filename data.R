@@ -1,4 +1,4 @@
-# Preprocess data, write TAF data tables
+# Prepare data, write CSV data tables
 
 # Before: PLE7DFleet_2016.txt, stockobject.RData (boot/data)
 # After:  assess.dat, datage.csv, input.RData, latage.csv, survey_fr.csv,

@@ -1,4 +1,4 @@
-# Prepare tables for report
+# Produce tables for report
 
 # Before: latage.csv, wlandings.csv, datage.csv, wdiscards.csv, wstock.csv,
 #         survey_uk.csv, survey_fr.csv (data), res_discards.csv,
